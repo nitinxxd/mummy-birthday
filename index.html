@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Birthday Gift</title>
     
-    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display+SC:wght@400&family=Reenie+Beanie&display=swap" rel="stylesheet">
@@ -18,17 +17,24 @@
             padding: 0;
         }
         
+        /* FIX: Prevents global viewport bouncing or browser navigation hiding buttons */
+        html, body {
+            height: 100%;
+            height: -webkit-fill-available;
+            overflow: hidden;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
             background: radial-gradient(circle at 20% 20%, #faf8f5 0%, #f3ede6 50%, #e6ded4 100%);
             color: #332c29; 
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: space-between; /* Securely distributes cards at top and buttons at bottom */
             align-items: center;
-            min-height: 100vh;
-            padding: 40px 24px;
-            overflow: hidden;
+            height: 100vh;
+            height: 100dvh; /* Accounts dynamically for mobile URL address and navbar shifts */
+            padding: 20px 24px 30px 24px; /* Generous bottom padding to clear mobile gesture home bars */
             position: relative;
             -webkit-font-smoothing: antialiased;
             transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -58,17 +64,18 @@
             100% { transform: translate(3% , 2%) scale(1.05); }
         }
 
-        /* Card Layout Page Setup */
+        /* FIX: Prevents container boxes from spilling lower than the bottom navigation boundaries */
         .card-page {
             display: none; 
             width: 100%;
             max-width: 360px;
-            flex-grow: 1;
+            flex: 1;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
             z-index: 2;
+            min-height: 0; 
         }
 
         .card-page.active {
@@ -101,7 +108,7 @@
 
         .knot-interactive-assembly {
             position: absolute;
-            top: 45%;
+            top: 42%;
             width: 180px;
             height: 140px;
             display: flex;
@@ -204,11 +211,8 @@
             z-index: 2;
         }
 
-        .serif-italic {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
+        .serif {
             font-size: 1.6rem;
-            color: #8a968d; 
             text-align: center;
             opacity: 0;
             transform: translateY(15px);
@@ -216,7 +220,7 @@
             z-index: 2;
         }
 
-        .revealed h1.cover-title, .revealed .serif-italic {
+        .revealed h1.cover-title, .revealed .serif {
             opacity: 1;
             transform: translateY(0);
         }
@@ -235,12 +239,12 @@
         }
 
         .cake-wrapper {
-            height: 130px;
+            height: 120px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -311,7 +315,7 @@
             display: flex;
             align-items: center;
             padding: 0 4px;
-            margin-top: 25px;
+            margin-top: 20px;
             box-shadow: inset 0 2px 6px rgba(244, 63, 94, 0.08);
         }
 
@@ -373,11 +377,11 @@
         .cut-complete .cake-candle { opacity: 0.2; }
         .cut-complete .slider-container { opacity: 0.1; pointer-events: none; }
 
-        /* --- NEW PAGE 3: ELECTRIC POLAROID MOSAIC CANVAS --- */
+        /* --- PAGE 3: ELECTRIC POLAROID MOSAIC CANVAS --- */
         .film-gallery-title {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 700;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             margin-bottom: 2px;
             color: #ffffff;
             text-align: center;
@@ -385,66 +389,62 @@
         }
 
         .film-gallery-subtitle {
-            font-size: 0.85rem;
-            color: #fef08a; /* Bright sun yellow accent */
+            font-size: 0.8rem;
+            color: #fef08a; 
             font-weight: 500;
-            margin-bottom: 35px;
+            margin-bottom: 20px;
             text-align: center;
             letter-spacing: 1px;
             text-transform: uppercase;
             text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
-        /* Staggered overlapping scrapbook grid system */
+        /* FIXED: Compressed bounding height to ensure frames wrap comfortably on small viewports */
         .mosaic-grid-box {
             width: 100%;
-            height: 380px;
+            height: 310px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Polaroid card core blueprint layout statements */
         .polaroid-card {
             position: absolute;
             background: #ffffff;
-            padding: 10px 10px 24px 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 3px 10px rgba(0,0,0,0.2);
+            padding: 8px 8px 18px 8px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.35), 0 3px 8px rgba(0,0,0,0.18);
             border-radius: 2px;
             transition: transform 0.4s ease, z-index 0.1s;
         }
 
-        /* Custom crop aspects to fill layout space effectively */
         .polaroid-card img {
-            width: 150px;
-            height: 150px;
+            width: 125px;
+            height: 125px;
             object-fit: cover;
             display: block;
             border: 1px solid #f3f4f6;
         }
 
-        /* Hand-written script fonts for signature notes */
         .polaroid-caption {
             font-family: 'Reenie Beanie', cursive;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #1f2937;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 8px;
             line-height: 1;
         }
 
-        /* Staggered Asymmetric placement values for total fullness */
-        .p-card-1 { top: 0px; left: 10px; transform: rotate(-6deg); z-index: 3; }
-        .p-card-2 { top: -20px; right: 10px; transform: rotate(5deg); z-index: 2; }
-        .p-card-3 { bottom: 15px; left: 30px; transform: rotate(4deg); z-index: 4; }
-        .p-card-4 { bottom: -10px; right: 15px; transform: rotate(-4deg); z-index: 1; }
+        /* Pack coordinates tightly inside safe boundaries */
+        .p-card-1 { top: 0px; left: 20px; transform: rotate(-6deg); z-index: 3; }
+        .p-card-2 { top: -15px; right: 20px; transform: rotate(5deg); z-index: 2; }
+        .p-card-3 { bottom: 10px; left: 35px; transform: rotate(4deg); z-index: 4; }
+        .p-card-4 { bottom: -10px; right: 25px; transform: rotate(-4deg); z-index: 1; }
 
-        /* Bring cards to focus seamlessly on touch */
         .polaroid-card:active {
             z-index: 50 !important;
             transform: scale(1.08) rotate(0deg) !important;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
         /* Core Animations */
@@ -496,21 +496,21 @@
             100% { transform: translate(370px, -60px) rotate(600deg); opacity: 0; }
         }
 
-        /* Universal Navigation Footer */
+        /* FIXED: Pinned navigation layout framework isolated completely at base viewport window */
         .nav-container {
             width: 100%;
             max-width: 360px;
-            margin-top: 30px;
             display: flex;
             justify-content: center;
-            z-index: 3;
+            z-index: 100;
             opacity: 0; 
             pointer-events: none;
-            transition: opacity 0.5s ease 1s;
+            transition: opacity 0.5s ease;
+            margin-top: auto; /* Drives structural balance cleanly downward */
+            padding-top: 15px;
         }
         .nav-container.show { opacity: 1; pointer-events: auto; }
 
-        /* Inverse footer color matching on bright active page gradient profiles */
         .bg-page3 .nav-btn {
             background: #ffffff;
             color: #881337;
@@ -522,22 +522,23 @@
             background: #2d4a36; 
             color: #ffffff;
             border: none;
-            padding: 14px 40px;
+            padding: 14px 44px;
             font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            border-radius: 4px;
+            border-radius: 6px;
             box-shadow: 0 10px 25px rgba(45, 74, 54, 0.15);
             -webkit-tap-highlight-color: transparent;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- PAGE 1: IMMERSIVE SAGE VELVET RIBBON -->
     <div id="page1" class="card-page active">
         
         <div class="ribbon-wrapper" id="ribbonSystem" onmousedown="startUntie()" ontouchstart="startUntie()" onmouseup="cancelUntie()" ontouchend="cancelUntie()">
@@ -593,7 +594,6 @@
     </div>
 
 
-    <!-- PAGE 2: INTERACTIVE STRAWBERRY CAKE REVEAL -->
     <div id="page2" class="card-page">
         <div class="interactive-area" id="wishCard">
             
@@ -627,42 +627,36 @@
     </div>
 
 
-<!-- PAGE 3: NEW ELECTRIC POLAROID CANVAS -->
-<div id="page3" class="card-page">
-    <h2 class="film-gallery-title">Our Favorite Moments</h2>
-    <div class="film-gallery-subtitle">Tap cards to bring forward ❤️</div>
-    
-    <div class="mosaic-grid-box">
+    <div id="page3" class="card-page">
+        <h2 class="film-gallery-title">Our Favorite Moments</h2>
+        <div class="film-gallery-subtitle">Tap cards to bring forward ❤️</div>
         
-        <!-- Photo 1 -->
-        <div class="polaroid-card p-card-1">
-            <img src="images/ph1.jpg" alt="Memory 1">
-            <div class="polaroid-caption">Best Mom ever</div>
-        </div>
+        <div class="mosaic-grid-box">
+            
+            <div class="polaroid-card p-card-1">
+                <img src="images/ph1.jpg" alt="Memory 1">
+                <div class="polaroid-caption">Best Mom ever</div>
+            </div>
 
-        <!-- Photo 2 -->
-        <div class="polaroid-card p-card-2">
-            <img src="images/ph2.jpg" alt="Memory 2">
-            <div class="polaroid-caption">A beautiful smile</div>
-        </div>
+            <div class="polaroid-card p-card-2">
+                <img src="images/ph2.jpg" alt="Memory 2">
+                <div class="polaroid-caption">A beautiful smile</div>
+            </div>
 
-        <!-- Photo 3 -->
-        <div class="polaroid-card p-card-3">
-            <img src="images/ph3.jpg" alt="Memory 3">
-            <div class="polaroid-caption">Unforgettable day</div>
-        </div>
+            <div class="polaroid-card p-card-3">
+                <img src="images/ph3.jpg" alt="Memory 3">
+                <div class="polaroid-caption">Unforgettable day</div>
+            </div>
 
-        <!-- Photo 4 -->
-        <div class="polaroid-card p-card-4">
-            <img src="images/ph4.jpg" alt="Memory 4">
-            <div class="polaroid-caption">Always laughing</div>
-        </div>
+            <div class="polaroid-card p-card-4">
+                <img src="images/ph4.jpg" alt="Memory 4">
+                <div class="polaroid-caption">Always laughing</div>
+            </div>
 
+        </div>
     </div>
-</div>
 
 
-    <!-- CONTROL NAVIGATION COMPONENT -->
     <div class="nav-container" id="globalNav">
         <button id="nextBtn" class="nav-btn" onclick="nextPage()">Open Card</button>
     </div>
@@ -673,9 +667,14 @@
         let currentPage = 1;
         const totalPages = 3;
 
+        // Force-disables dynamic multi-tap safari webview zoom loops
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+
         // --- Page 1 Ribbon Script Router ---
         function startUntie() {
-            document.getElementById('tagText').innerHTML = "Opening...";
+            document.getElementById('tagText').innerHTML = "Opening... ✨";
             holdTimer = setTimeout(() => {
                 document.getElementById('ribbonSystem').classList.add('untied');
                 document.getElementById('page1').classList.add('revealed');
@@ -686,7 +685,6 @@
             }, 1200); 
         }
 
-        // Untie cleanup loops
         function cancelUntie() {
             clearTimeout(holdTimer);
             if (!document.getElementById('ribbonSystem').classList.contains('untied')) {
@@ -754,7 +752,6 @@
             if (currentPage > totalPages) currentPage = 1;
             document.getElementById(`page${currentPage}`).classList.add('active');
 
-            // Handle adaptive body state styling sets cleanly
             if(currentPage === 1) document.body.className = "";
             else if(currentPage === 2) document.body.className = "bg-page2";
             else if(currentPage === 3) document.body.className = "bg-page3";

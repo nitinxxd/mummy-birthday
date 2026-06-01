@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Birthday Gift</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display+SC:wght@400&family=Reenie+Beanie&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display+SC:wght@400&family=Reenie+Beanie&display=swap"
+        rel="stylesheet">
 
     <style>
         /* Modern Premium Reset */
@@ -16,25 +19,29 @@
             margin: 0;
             padding: 0;
         }
-        
+
         /* FIX: Prevents global viewport bouncing or browser navigation hiding buttons */
-        html, body {
+        html,
+        body {
             height: 100%;
             height: -webkit-fill-available;
             overflow: hidden;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background: radial-gradient(circle at 20% 20%, #faf8f5 0%, #f3ede6 50%, #e6ded4 100%);
-            color: #332c29; 
+            color: #332c29;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Securely distributes cards at top and buttons at bottom */
+            justify-content: space-between;
+            /* Securely distributes cards at top and buttons at bottom */
             align-items: center;
             height: 100vh;
-            height: 100dvh; /* Accounts dynamically for mobile URL address and navbar shifts */
-            padding: 20px 24px 30px 24px; /* Generous bottom padding to clear mobile gesture home bars */
+            height: 100dvh;
+            /* Accounts dynamically for mobile URL address and navbar shifts */
+            padding: 20px 24px 30px 24px;
+            /* Generous bottom padding to clear mobile gesture home bars */
             position: relative;
             -webkit-font-smoothing: antialiased;
             transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -44,6 +51,7 @@
         body.bg-page2 {
             background: linear-gradient(135deg, #fff3f3 0%, #fff0e6 50%, #fed7aa 100%);
         }
+
         body.bg-page3 {
             background: linear-gradient(135deg, #111827 0%, #881337 50%, #f59e0b 100%);
         }
@@ -52,7 +60,10 @@
         body::before {
             content: "";
             position: absolute;
-            top: -50%; left: -50%; right: -50%; bottom: -50%;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
             background: radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
             animation: watercolorShift 14s infinite alternate ease-in-out;
             z-index: 1;
@@ -60,13 +71,18 @@
         }
 
         @keyframes watercolorShift {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(3% , 2%) scale(1.05); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(3%, 2%) scale(1.05);
+            }
         }
 
         /* FIX: Prevents container boxes from spilling lower than the bottom navigation boundaries */
         .card-page {
-            display: none; 
+            display: none;
             width: 100%;
             max-width: 360px;
             flex: 1;
@@ -75,17 +91,20 @@
             align-items: center;
             position: relative;
             z-index: 2;
-            min-height: 0; 
+            min-height: 0;
         }
 
         .card-page.active {
-            display: flex; 
+            display: flex;
         }
 
         /* --- PAGE 1: VELVET SAGE RIBBON & DELUGE POPPER --- */
         .ribbon-wrapper {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -122,10 +141,10 @@
         .tag-rectangular-box {
             background: rgba(255, 255, 255, 0.94);
             padding: 12px 24px;
-            border-radius: 8px; 
+            border-radius: 8px;
             box-shadow: 0 12px 35px rgba(44, 38, 35, 0.08);
-            border: 1px solid #d4af37; 
-            outline: 3px solid rgba(212, 175, 55, 0.15); 
+            border: 1px solid #d4af37;
+            outline: 3px solid rgba(212, 175, 55, 0.15);
             outline-offset: -6px;
             margin-top: -10px;
             position: relative;
@@ -136,8 +155,8 @@
         .ribbon-instructions {
             font-family: 'Playfair Display SC', serif;
             font-size: 0.68rem;
-            letter-spacing: 2.5px; 
-            color: #2d4a36; 
+            letter-spacing: 2.5px;
+            color: #2d4a36;
             font-weight: 600;
             text-transform: uppercase;
             text-align: center;
@@ -151,6 +170,7 @@
             pointer-events: none;
             transform: scale(1.06);
         }
+
         .ribbon-wrapper.untied .curved-ribbon-svg,
         .ribbon-wrapper.untied .knot-interactive-assembly {
             transform: scale(0.2);
@@ -161,7 +181,10 @@
         .popper-overlay {
             display: none;
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 1;
         }
@@ -186,23 +209,70 @@
             left: 40px;
         }
 
-        .burst-active .popper-overlay { display: block; }
-        .burst-active .popper-canister { animation: popperPop 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards; }
+        .burst-active .popper-overlay {
+            display: block;
+        }
 
-        .burst-active .pc-1  { background: #ef4444; width: 12px; height: 12px; animation: blastDiag1 3s infinite cubic-bezier(0.1, 0.8, 0.2, 1); }
-        .burst-active .pc-2  { background: #3b82f6; border-radius: 2px; width: 8px; height: 18px; animation: blastDiag2 3.2s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.1s; }
-        .burst-active .pc-3  { background: #dfba6b; animation: blastDiag3 2.8s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.2s; }
-        .burst-active .pc-4  { background: #10b981; width: 16px; height: 6px; animation: blastDiag4 3.1s infinite cubic-bezier(0.1, 0.8, 0.2, 1); }
-        .burst-active .pc-5  { background: #ec4899; border-radius: 3px; width: 10px; height: 10px; animation: blastDiag5 2.9s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.3s; }
-        .burst-active .pc-6  { background: #f59e0b; width: 14px; height: 14px; animation: blastDiag1 3.3s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.4s; }
-        .burst-active .pc-7  { background: #8b5cf6; border-radius: 50%; width: 9px; height: 9px; animation: blastDiag3 2.7s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.15s; }
+        .burst-active .popper-canister {
+            animation: popperPop 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+        }
+
+        .burst-active .pc-1 {
+            background: #ef4444;
+            width: 12px;
+            height: 12px;
+            animation: blastDiag1 3s infinite cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .burst-active .pc-2 {
+            background: #3b82f6;
+            border-radius: 2px;
+            width: 8px;
+            height: 18px;
+            animation: blastDiag2 3.2s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.1s;
+        }
+
+        .burst-active .pc-3 {
+            background: #dfba6b;
+            animation: blastDiag3 2.8s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.2s;
+        }
+
+        .burst-active .pc-4 {
+            background: #10b981;
+            width: 16px;
+            height: 6px;
+            animation: blastDiag4 3.1s infinite cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        .burst-active .pc-5 {
+            background: #ec4899;
+            border-radius: 3px;
+            width: 10px;
+            height: 10px;
+            animation: blastDiag5 2.9s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.3s;
+        }
+
+        .burst-active .pc-6 {
+            background: #f59e0b;
+            width: 14px;
+            height: 14px;
+            animation: blastDiag1 3.3s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.4s;
+        }
+
+        .burst-active .pc-7 {
+            background: #8b5cf6;
+            border-radius: 50%;
+            width: 9px;
+            height: 9px;
+            animation: blastDiag3 2.7s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.15s;
+        }
 
         h1.cover-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 3.2rem;
             font-weight: 400;
             line-height: 1.1;
-            color: #2d4a36; 
+            color: #2d4a36;
             margin-bottom: 12px;
             text-align: center;
             opacity: 0;
@@ -220,7 +290,8 @@
             z-index: 2;
         }
 
-        .revealed h1.cover-title, .revealed .serif {
+        .revealed h1.cover-title,
+        .revealed .serif {
             opacity: 1;
             transform: translateY(0);
         }
@@ -230,7 +301,7 @@
             background: #ffffff;
             width: 100%;
             padding: 45px 24px;
-            border-radius: 16px; 
+            border-radius: 16px;
             box-shadow: 0 25px 50px rgba(244, 63, 94, 0.15);
             border: 2px solid #f43f5e;
             text-align: center;
@@ -257,10 +328,15 @@
             z-index: 3;
             transition: opacity 0.3s ease;
         }
+
         .cake-candle::before {
             content: "";
             position: absolute;
-            top: -4px; left: 3px; width: 2px; height: 5px; background: #332c29;
+            top: -4px;
+            left: 3px;
+            width: 2px;
+            height: 5px;
+            background: #332c29;
         }
 
         .cake-flame {
@@ -269,7 +345,8 @@
             background: linear-gradient(to bottom, #ffffff, #facc15, #f97316);
             border-radius: 50% 50% 35% 35%;
             position: absolute;
-            top: -22px; left: -2px;
+            top: -22px;
+            left: -2px;
             box-shadow: 0 0 15px #facc15, 0 0 30px #f97316;
             animation: elegantFlicker 0.6s infinite alternate ease-in-out;
         }
@@ -288,19 +365,28 @@
         .cake-half {
             width: 80px;
             height: 65px;
-            background: #fbcfe8; 
+            background: #fbcfe8;
             position: relative;
             border-bottom: 5px solid #f43f5e;
-            box-shadow: inset 0 6px 0 rgba(255,255,255,0.5);
+            box-shadow: inset 0 6px 0 rgba(255, 255, 255, 0.5);
         }
-        .cake-half.left-slice { border-radius: 12px 0 0 4px; }
-        .cake-half.right-slice { border-radius: 0 12px 4px 0; }
+
+        .cake-half.left-slice {
+            border-radius: 12px 0 0 4px;
+        }
+
+        .cake-half.right-slice {
+            border-radius: 0 12px 4px 0;
+        }
 
         .cake-half::after {
             content: "";
             position: absolute;
-            top: 24px; left: 0; width: 100%; height: 14px;
-            background: #fffbeb; 
+            top: 24px;
+            left: 0;
+            width: 100%;
+            height: 14px;
+            background: #fffbeb;
             border-top: 2.5px solid #fb7185;
             border-bottom: 2.5px solid #fb7185;
         }
@@ -353,7 +439,10 @@
         .page2-popper-overlay {
             display: none;
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 99;
         }
@@ -365,17 +454,51 @@
             bottom: 20%;
         }
 
-        .cut-complete .page2-popper-overlay { display: block; }
-        .cut-complete .we-1 { animation: verticalPopper 1.8s infinite cubic-bezier(0.1, 0.8, 0.2, 1); left: 8%; }
-        .cut-complete .we-2 { animation: verticalPopper 1.5s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.2s; left: 28%; }
-        .cut-complete .we-3 { animation: verticalPopper 1.9s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.4s; left: 48%; }
-        .cut-complete .we-4 { animation: verticalPopper 1.6s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.1s; right: 28%; }
-        .cut-complete .we-5 { animation: verticalPopper 1.4s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.3s; right: 8%; }
+        .cut-complete .page2-popper-overlay {
+            display: block;
+        }
 
-        .cut-complete .cake-body-container { gap: 40px; } 
-        .cut-complete .cake-flame { display: none; }
-        .cut-complete .cake-candle { opacity: 0.2; }
-        .cut-complete .slider-container { opacity: 0.1; pointer-events: none; }
+        .cut-complete .we-1 {
+            animation: verticalPopper 1.8s infinite cubic-bezier(0.1, 0.8, 0.2, 1);
+            left: 8%;
+        }
+
+        .cut-complete .we-2 {
+            animation: verticalPopper 1.5s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.2s;
+            left: 28%;
+        }
+
+        .cut-complete .we-3 {
+            animation: verticalPopper 1.9s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.4s;
+            left: 48%;
+        }
+
+        .cut-complete .we-4 {
+            animation: verticalPopper 1.6s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.1s;
+            right: 28%;
+        }
+
+        .cut-complete .we-5 {
+            animation: verticalPopper 1.4s infinite cubic-bezier(0.1, 0.8, 0.2, 1) 0.3s;
+            right: 8%;
+        }
+
+        .cut-complete .cake-body-container {
+            gap: 40px;
+        }
+
+        .cut-complete .cake-flame {
+            display: none;
+        }
+
+        .cut-complete .cake-candle {
+            opacity: 0.2;
+        }
+
+        .cut-complete .slider-container {
+            opacity: 0.1;
+            pointer-events: none;
+        }
 
         /* --- PAGE 3: ELECTRIC POLAROID MOSAIC CANVAS --- */
         .film-gallery-title {
@@ -385,18 +508,18 @@
             margin-bottom: 2px;
             color: #ffffff;
             text-align: center;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         .film-gallery-subtitle {
             font-size: 0.8rem;
-            color: #fef08a; 
+            color: #fef08a;
             font-weight: 500;
             margin-bottom: 20px;
             text-align: center;
             letter-spacing: 1px;
             text-transform: uppercase;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         /* FIXED: Compressed bounding height to ensure frames wrap comfortably on small viewports */
@@ -413,7 +536,7 @@
             position: absolute;
             background: #ffffff;
             padding: 8px 8px 18px 8px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.35), 0 3px 8px rgba(0,0,0,0.18);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35), 0 3px 8px rgba(0, 0, 0, 0.18);
             border-radius: 2px;
             transition: transform 0.4s ease, z-index 0.1s;
         }
@@ -436,64 +559,187 @@
         }
 
         /* Pack coordinates tightly inside safe boundaries */
-        .p-card-1 { top: 0px; left: 20px; transform: rotate(-6deg); z-index: 3; }
-        .p-card-2 { top: -15px; right: 20px; transform: rotate(5deg); z-index: 2; }
-        .p-card-3 { bottom: 10px; left: 35px; transform: rotate(4deg); z-index: 4; }
-        .p-card-4 { bottom: -10px; right: 25px; transform: rotate(-4deg); z-index: 1; }
+        .p-card-1 {
+            top: 0px;
+            left: 20px;
+            transform: rotate(-6deg);
+            z-index: 3;
+        }
+
+        .p-card-2 {
+            top: -15px;
+            right: 20px;
+            transform: rotate(5deg);
+            z-index: 2;
+        }
+
+        .p-card-3 {
+            bottom: 10px;
+            left: 35px;
+            transform: rotate(4deg);
+            z-index: 4;
+        }
+
+        .p-card-4 {
+            bottom: -10px;
+            right: 25px;
+            transform: rotate(-4deg);
+            z-index: 1;
+        }
 
         .polaroid-card:active {
             z-index: 50 !important;
             transform: scale(1.08) rotate(0deg) !important;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         /* Core Animations */
         @keyframes elegantFlicker {
-            0% { transform: scale(1) rotate(-1deg); }
-            100% { transform: scale(1.05) rotate(1.2deg); }
+            0% {
+                transform: scale(1) rotate(-1deg);
+            }
+
+            100% {
+                transform: scale(1.05) rotate(1.2deg);
+            }
         }
-        
+
         @keyframes verticalPopper {
-            0% { transform: translateY(0) scale(0.3) rotate(0deg); opacity: 0; }
-            15% { opacity: 1; }
-            85% { opacity: 1; }
-            100% { transform: translateY(-460px) scale(1.3) rotate(35deg); opacity: 0; filter: blur(1px); }
+            0% {
+                transform: translateY(0) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            85% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-460px) scale(1.3) rotate(35deg);
+                opacity: 0;
+                filter: blur(1px);
+            }
         }
 
         @keyframes popperPop {
-            0% { transform: translate(-30px, 30px) rotate(45deg); opacity: 0; }
-            100% { transform: translate(0, 0) rotate(45deg); opacity: 1; }
+            0% {
+                transform: translate(-30px, 30px) rotate(45deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(45deg);
+                opacity: 1;
+            }
         }
 
         @keyframes blastDiag1 {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            5% { opacity: 1; }
-            35% { transform: translate(160px, -290px) rotate(280deg); opacity: 1; }
-            100% { transform: translate(200px, -40px) rotate(600deg); opacity: 0; }
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            35% {
+                transform: translate(160px, -290px) rotate(280deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(200px, -40px) rotate(600deg);
+                opacity: 0;
+            }
         }
+
         @keyframes blastDiag2 {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            5% { opacity: 1; }
-            35% { transform: translate(290px, -180px) rotate(-190deg); opacity: 1; }
-            100% { transform: translate(335px, 60px) rotate(-400deg); opacity: 0; }
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            35% {
+                transform: translate(290px, -180px) rotate(-190deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(335px, 60px) rotate(-400deg);
+                opacity: 0;
+            }
         }
+
         @keyframes blastDiag3 {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            5% { opacity: 1; }
-            35% { transform: translate(210px, -410px) rotate(390deg); opacity: 1; }
-            100% { transform: translate(240px, -140px) rotate(700deg); opacity: 0; }
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            35% {
+                transform: translate(210px, -410px) rotate(390deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(240px, -140px) rotate(700deg);
+                opacity: 0;
+            }
         }
+
         @keyframes blastDiag4 {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            5% { opacity: 1; }
-            35% { transform: translate(90px, -430px) rotate(-140deg); opacity: 1; }
-            100% { transform: translate(115px, -160px) rotate(-340deg); opacity: 0; }
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            35% {
+                transform: translate(90px, -430px) rotate(-140deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(115px, -160px) rotate(-340deg);
+                opacity: 0;
+            }
         }
+
         @keyframes blastDiag5 {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            5% { opacity: 1; }
-            35% { transform: translate(340px, -320px) rotate(310deg); opacity: 1; }
-            100% { transform: translate(370px, -60px) rotate(600deg); opacity: 0; }
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            35% {
+                transform: translate(340px, -320px) rotate(310deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(370px, -60px) rotate(600deg);
+                opacity: 0;
+            }
         }
 
         /* FIXED: Pinned navigation layout framework isolated completely at base viewport window */
@@ -503,23 +749,28 @@
             display: flex;
             justify-content: center;
             z-index: 100;
-            opacity: 0; 
+            opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s ease;
-            margin-top: auto; /* Drives structural balance cleanly downward */
+            margin-top: auto;
+            /* Drives structural balance cleanly downward */
             padding-top: 15px;
         }
-        .nav-container.show { opacity: 1; pointer-events: auto; }
+
+        .nav-container.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
         .bg-page3 .nav-btn {
             background: #ffffff;
             color: #881337;
             font-weight: 700;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
         .nav-btn {
-            background: #2d4a36; 
+            background: #2d4a36;
             color: #ffffff;
             border: none;
             padding: 14px 44px;
@@ -537,14 +788,17 @@
         }
     </style>
 </head>
+
 <body>
 
     <div id="page1" class="card-page active">
-        
-        <div class="ribbon-wrapper" id="ribbonSystem" onmousedown="startUntie()" ontouchstart="startUntie()" onmouseup="cancelUntie()" ontouchend="cancelUntie()">
-            
+
+        <div class="ribbon-wrapper" id="ribbonSystem" onmousedown="startUntie()" ontouchstart="startUntie()"
+            onmouseup="cancelUntie()" ontouchend="cancelUntie()">
+
             <svg class="curved-ribbon-svg" viewBox="0 0 100 800" preserveAspectRatio="none">
-                <path d="M50,-20 C10,130 90,230 50,380 C10,530 90,670 50,820" fill="none" stroke="url(#velvetSage)" stroke-width="36" stroke-linecap="round"/>
+                <path d="M50,-20 C10,130 90,230 50,380 C10,530 90,670 50,820" fill="none" stroke="url(#velvetSage)"
+                    stroke-width="36" stroke-linecap="round" />
                 <defs>
                     <linearGradient id="velvetSage" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stop-color="#14261a" />
@@ -565,14 +819,17 @@
                             <stop offset="100%" stop-color="#14261a" />
                         </linearGradient>
                         <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-                            <feDropShadow dx="2" dy="5" stdDeviation="4" flood-opacity="0.3"/>
+                            <feDropShadow dx="2" dy="5" stdDeviation="4" flood-opacity="0.3" />
                         </filter>
                     </defs>
-                    <path d="M90,50 C40,20 10,25 20,50 C30,75 70,65 90,50" fill="url(#knotGrad)" filter="url(#shadow)"/>
-                    <path d="M90,50 C140,20 170,25 160,50 C150,75 110,65 90,50" fill="url(#knotGrad)" filter="url(#shadow)"/>
-                    <path d="M76,38 C80,36 100,36 104,38 C108,45 106,55 104,62 C100,64 80,64 76,62 C72,55 72,45 76,38 Z" fill="url(#knotGrad)" stroke="#14261a" stroke-width="1" filter="url(#shadow)" />
+                    <path d="M90,50 C40,20 10,25 20,50 C30,75 70,65 90,50" fill="url(#knotGrad)"
+                        filter="url(#shadow)" />
+                    <path d="M90,50 C140,20 170,25 160,50 C150,75 110,65 90,50" fill="url(#knotGrad)"
+                        filter="url(#shadow)" />
+                    <path d="M76,38 C80,36 100,36 104,38 C108,45 106,55 104,62 C100,64 80,64 76,62 C72,55 72,45 76,38 Z"
+                        fill="url(#knotGrad)" stroke="#14261a" stroke-width="1" filter="url(#shadow)" />
                 </svg>
-                
+
                 <div class="tag-rectangular-box">
                     <div class="ribbon-instructions" id="tagText">Hold this to open</div>
                 </div>
@@ -582,11 +839,17 @@
 
         <div class="popper-overlay">
             <svg class="popper-canister" viewBox="0 0 100 100">
-                <path d="M20,80 L80,80 L50,20 Z" fill="#ef4444" stroke="#d4af37" stroke-width="2"/>
-                <path d="M35,50 Q50,60 65,50" fill="none" stroke="#fff" stroke-width="3"/>
-                <circle cx="50" cy="80" r="6" fill="#3b82f6"/>
+                <path d="M20,80 L80,80 L50,20 Z" fill="#ef4444" stroke="#d4af37" stroke-width="2" />
+                <path d="M35,50 Q50,60 65,50" fill="none" stroke="#fff" stroke-width="3" />
+                <circle cx="50" cy="80" r="6" fill="#3b82f6" />
             </svg>
-            <div class="popper-confetti pc-1"></div><div class="popper-confetti pc-2"></div><div class="popper-confetti pc-3"></div><div class="popper-confetti pc-4"></div><div class="popper-confetti pc-5"></div><div class="popper-confetti pc-6"></div><div class="popper-confetti pc-7"></div>
+            <div class="popper-confetti pc-1"></div>
+            <div class="popper-confetti pc-2"></div>
+            <div class="popper-confetti pc-3"></div>
+            <div class="popper-confetti pc-4"></div>
+            <div class="popper-confetti pc-5"></div>
+            <div class="popper-confetti pc-6"></div>
+            <div class="popper-confetti pc-7"></div>
         </div>
 
         <h1 class="cover-title">Happy Birthday,<br>Mummy.</h1>
@@ -596,7 +859,7 @@
 
     <div id="page2" class="card-page">
         <div class="interactive-area" id="wishCard">
-            
+
             <div class="page2-popper-overlay">
                 <div class="wish-emoji we-1">🎉</div>
                 <div class="wish-emoji we-2">🥳</div>
@@ -614,9 +877,11 @@
                     <div class="cake-half right-slice"></div>
                 </div>
             </div>
-            
+
             <div id="prompt-text">
-                <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.8rem; margin-bottom: 6px; color: #f43f5e;">Make a Wish</h2>
+                <h2
+                    style="font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.8rem; margin-bottom: 6px; color: #f43f5e;">
+                    Make a Wish</h2>
                 <div class="slider-container">
                     <div class="slider-text">Slide knife to cut cake</div>
                     <div class="slider-knife-btn" id="knifeBtn">🔪</div>
@@ -630,9 +895,9 @@
     <div id="page3" class="card-page">
         <h2 class="film-gallery-title">Our Favorite Moments</h2>
         <div class="film-gallery-subtitle">Tap cards to bring forward ❤️</div>
-        
+
         <div class="mosaic-grid-box">
-            
+
             <div class="polaroid-card p-card-1">
                 <img src="images/ph1.jpg" alt="Memory 1">
                 <div class="polaroid-caption">Best Mom ever</div>
@@ -668,27 +933,27 @@
         const totalPages = 3;
 
         // Force-disables dynamic multi-tap safari webview zoom loops
-        document.addEventListener('gesturestart', function(e) {
+        document.addEventListener('gesturestart', function (e) {
             e.preventDefault();
         });
 
         // --- Page 1 Ribbon Script Router ---
         function startUntie() {
-            document.getElementById('tagText').innerHTML = "Opening... ✨";
+            document.getElementById('tagText').innerHTML = "Opening...";
             holdTimer = setTimeout(() => {
                 document.getElementById('ribbonSystem').classList.add('untied');
                 document.getElementById('page1').classList.add('revealed');
                 document.getElementById('page1').classList.add('burst-active');
-                
+
                 document.body.className = "bg-page2";
                 document.getElementById('globalNav').classList.add('show');
-            }, 1200); 
+            }, 1200);
         }
 
         function cancelUntie() {
             clearTimeout(holdTimer);
             if (!document.getElementById('ribbonSystem').classList.contains('untied')) {
-                document.getElementById('tagText').innerHTML = "Hold To Untie";
+                document.getElementById('tagText').innerHTML = "Hold To Open";
             }
         }
 
@@ -706,19 +971,19 @@
         window.addEventListener('touchend', dragEnd);
 
         function dragStart(e) {
-            if(document.getElementById('wishCard').classList.contains('cut-complete')) return;
+            if (document.getElementById('wishCard').classList.contains('cut-complete')) return;
             isDragging = true;
             startX = e.touches ? e.touches[0].clientX : e.clientX;
         }
 
         function dragMove(e) {
             if (!isDragging) return;
-            if (e.cancelable) e.preventDefault(); 
-            
+            if (e.cancelable) e.preventDefault();
+
             const currentX = e.touches ? e.touches[0].clientX : e.clientX;
             const containerRect = sliderContainer.getBoundingClientRect();
-            const maxDelta = containerRect.width - knife.offsetWidth - 8; 
-            
+            const maxDelta = containerRect.width - knife.offsetWidth - 8;
+
             let deltaX = currentX - startX;
             if (deltaX < 0) deltaX = 0;
             if (deltaX > maxDelta) deltaX = maxDelta;
@@ -752,9 +1017,9 @@
             if (currentPage > totalPages) currentPage = 1;
             document.getElementById(`page${currentPage}`).classList.add('active');
 
-            if(currentPage === 1) document.body.className = "";
-            else if(currentPage === 2) document.body.className = "bg-page2";
-            else if(currentPage === 3) document.body.className = "bg-page3";
+            if (currentPage === 1) document.body.className = "";
+            else if (currentPage === 2) document.body.className = "bg-page2";
+            else if (currentPage === 3) document.body.className = "bg-page3";
 
             const btn = document.getElementById('nextBtn');
             if (currentPage === 1) btn.innerText = "Open Card";
@@ -764,4 +1029,5 @@
     </script>
 
 </body>
+
 </html>

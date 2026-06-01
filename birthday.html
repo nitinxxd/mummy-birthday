@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Mom</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&family=Playfair+Display+SC:wght@400&family=Reenie+Beanie&display=swap" rel="stylesheet">
+
+    <style>
+        /* Modern Premium Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 20% 20%, #fcf7f2 0%, #f5e6de 40%, #ebd2c5 80%);
+            color: #2e2a28; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 24px;
+            overflow: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient shifting watercolor depth */
+        body::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%; right: -50%; bottom: -50%;
+            background: radial-gradient(circle at 80% 80%, rgba(240,210,195,0.5) 0%, transparent 50%);
+            animation: watercolorShift 12s infinite alternate ease-in-out;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes watercolorShift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(4% , 4%) scale(1.1); }
+        }
+
+        /* Card Layout Page Setup */
+        .card-page {
+            display: none; 
+            width: 100%;
+            max-width: 360px;
+            flex-grow: 1;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-page.active {
+            display: flex; 
+        }
+
+        /* --- PAGE 1: RE-DESIGNED KNOT & TAG SYSTEM --- */
+        .ribbon-wrapper {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* Waving Ribbon Path */
+        .curved-ribbon-svg {
+            position: absolute;
+            top: 0;
+            height: 100vh;
+            width: 140px;
+            filter: drop-shadow(5px 15px 12px rgba(130, 15, 15, 0.28));
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* The central ribbon cinched knot wrapper */
+        .knot-center-assembly {
+            position: absolute;
+            top: 46%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+        }
+
+        /* Round Button serving as the physical centerpiece knot */
+        .ribbon-knot-button {
+            width: 48px;
+            height: 52px;
+            background: linear-gradient(to bottom, #ef4444, #dc2626, #991b1b);
+            border-radius: 50% 50% 45% 45%; /* Slightly organic, fabric-like round shape */
+            box-shadow: 
+                0 6px 15px rgba(0,0,0,0.25), 
+                inset 0 2px 3px rgba(255,255,255,0.4),
+                inset 0 -3px 5px rgba(0,0,0,0.2);
+            border: 1px solid #b91c1c;
+            position: relative;
+            z-index: 4;
+            transition: transform 0.2s ease;
+        }
+
+        /* The rounded-rectangle box background behind the instruction text */
+        .tag-rectangular-box {
+            background: #ffffff;
+            padding: 10px 22px;
+            border-radius: 12px; /* Smooth rounded rectangular box */
+            box-shadow: 0 10px 25px rgba(112, 83, 71, 0.12);
+            border: 1px solid rgba(112, 83, 71, 0.06);
+            margin-top: 15px; /* Floats elegantly right below the circular knot */
+            z-index: 2;
+            position: relative;
+            transform: rotate(-1.5deg); /* Slight organic lean so it looks hand-tied */
+        }
+
+        /* Instructional text inside the rounded rectangle card */
+        .ribbon-instructions {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            color: #b31d1d;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+            white-space: nowrap;
+            line-height: 1.3;
+            pointer-events: none;
+        }
+
+        /* Ribbon Untied Dissolve Animation */
+        .ribbon-wrapper.untied {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.05);
+        }
+        .ribbon-wrapper.untied .curved-ribbon-svg,
+        .ribbon-wrapper.untied .knot-center-assembly {
+            transform: scale(0.1);
+            filter: blur(5px);
+        }
+
+        /* Cover Typography */
+        h1.cover-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 400;
+            line-height: 1.1;
+            color: #705347; 
+            margin-bottom: 12px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 1.2s ease-out 0.4s;
+        }
+
+        .serif-italic {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.6rem;
+            color: #9c8479;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 1.2s ease-out 0.7s;
+        }
+
+        .revealed h1.cover-title, .revealed .serif-italic {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- PAGE 2: INTERACTIVE HANDWRITTEN REVEAL --- */
+        .interactive-area {
+            background: #ffffff;
+            width: 100%;
+            padding: 45px 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(112, 83, 71, 0.05);
+            border: 1px solid rgba(112, 83, 71, 0.03);
+            text-align: center;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .candle-container {
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 25px;
+        }
+
+        .candle {
+            width: 10px;
+            height: 45px;
+            background: #e6ded9;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .flame {
+            width: 10px;
+            height: 20px;
+            background: linear-gradient(to bottom, #ffeb3b 0%, #f4511e 100%);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -24px;
+            box-shadow: 0 0 15px rgba(244, 81, 30, 0.4);
+            animation: flicker 0.5s infinite alternate ease-in-out;
+        }
+
+        .ink-letter {
+            display: none;
+            text-align: left;
+            padding: 10px 5px;
+        }
+
+        .ink-line {
+            font-family: 'Reenie Beanie', cursive;
+            font-size: 2rem;
+            color: #3d3531;
+            line-height: 1.3;
+            opacity: 0;
+            transform: translateY(5px);
+            margin-bottom: 8px;
+        }
+
+        .write-active {
+            animation: inkBleed 1.5s ease-out forwards;
+        }
+
+        @keyframes inkBleed { to { opacity: 1; transform: translateY(0); } }
+        @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+
+        /* --- PAGE 3: PICTURE GALLERY PLACEHOLDER --- */
+        .gallery-container { width: 100%; display: flex; flex-direction: column; gap: 16px; }
+        .frame-large { width: 100%; height: 200px; border-radius: 12px; overflow: hidden; border: 6px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.04); }
+        .gallery-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Universal Navigation Footer */
+        .nav-container {
+            width: 100%;
+            max-width: 360px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            z-index: 3;
+            opacity: 0; 
+            pointer-events: none;
+            transition: opacity 0.5s ease 1s;
+        }
+        .nav-container.show { opacity: 1; pointer-events: auto; }
+
+        .nav-btn {
+            background: #705347;
+            color: #ffffff;
+            border: none;
+            padding: 14px 36px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(112, 83, 71, 0.15);
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: FIXED TRUE NATIVE CURVED RED RIBBON -->
+    <div id="page1" class="card-page active">
+        
+        <!-- Pressing anywhere on this entire area triggers the untie hold -->
+        <div class="ribbon-wrapper" id="ribbonSystem" onmousedown="startUntie()" ontouchstart="startUntie()" onmouseup="cancelUntie()" ontouchend="cancelUntie()">
+            
+            <!-- Beautiful fluid S-curve vector red ribbon path with authentic fabric sheen mapping -->
+            <svg class="curved-ribbon-svg" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M50,0 C15,150 85,250 50,400 C15,550 85,650 50,800" 
+                      fill="none" 
+                      stroke="url(#satinRed)" 
+                      stroke-width="34" 
+                      stroke-linecap="round"/>
+                <defs>
+                    <!-- Silk metallic reflective color gradient -->
+                    <linearGradient id="satinRed" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#801111" />
+                        <stop offset="25%" stop-color="#b91c1c" />
+                        <stop offset="50%" stop-color="#ef4444" />
+                        <stop offset="75%" stop-color="#b91c1c" />
+                        <stop offset="100%" stop-color="#801111" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <!-- Centered structural assembly combining the Knot & Tag -->
+            <div class="knot-center-assembly">
+                <!-- The round button fashioned directly into the fabric ribbon knot center -->
+                <div class="ribbon-knot-button"></div>
+                
+                <!-- The rounded-rectangular box hanging directly behind the instruction text -->
+                <div class="tag-rectangular-box">
+                    <div class="ribbon-instructions" id="tagText">Hold To Untie</div>
+                </div>
+            </div>
+
+        </div>
+
+        <h1 class="cover-title">Happy Birthday,<br>Mom.</h1>
+        <div class="serif-italic" style="margin-top: 20px;">This day is all yours.</div>
+    </div>
+
+
+    <!-- PAGE 2: REAL-TIME HANDWRITTEN LETTER -->
+    <div id="page2" class="card-page">
+        <div class="interactive-area" id="interactiveCard" onclick="blowCandle()">
+            
+            <div class="candle-container" id="candleBox">
+                <div class="candle"><div id="flame" class="flame"></div></div>
+            </div>
+            
+            <div id="prompt-text">
+                <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.8rem; margin-bottom: 8px; color: #705347;">Make a Wish</h2>
+                <p style="font-size: 0.9rem; color: #9c8479; font-weight: 300;">Tap here to blow out your candle.</p>
+            </div>
+            
+            <!-- Human, Sequential Ink Letter Box -->
+            <div class="ink-letter" id="letterBox">
+                <div class="ink-line" id="line1">To the most wonderful mom,</div>
+                <div class="ink-line" id="line2">May this year bring you as much comfort,</div>
+                <div class="ink-line" id="line3">warmth, and deep joy as you beautifully</div>
+                <div class="ink-line" id="line4">give to all of us every single day.</div>
+                <div class="ink-line" id="line5" style="text-align: right; margin-top: 15px; font-size: 2.2rem; color: #b31d1d;">We love you. ❤️</div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- PAGE 3: MEMORY PHOTO GALLERY (Placeholder) -->
+    <div id="page3" class="card-page">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 2rem; margin-bottom: 20px; color: #705347;">Favorite Moments</h2>
+        <div class="gallery-container">
+            <div class="frame-large"><img src="photo1.jpg" alt="Mom Portrait"></div>
+        </div>
+    </div>
+
+
+    <!-- GLOBAL NAVIGATION ACTION BUTTON -->
+    <div class="nav-container" id="globalNav">
+        <button id="nextBtn" class="nav-btn" onclick="nextPage()">Open Card</button>
+    </div>
+
+
+    <script>
+        let holdTimer;
+        let currentPage = 1;
+        const totalPages = 3;
+
+        // --- Ribbon Timing Logic ---
+        function startUntie() {
+            document.getElementById('tagText').innerHTML = "Opening... ✨";
+            holdTimer = setTimeout(() => {
+                document.getElementById('ribbonSystem').classList.add('untied');
+                document.getElementById('page1').classList.add('revealed');
+                document.getElementById('globalNav').classList.add('show');
+            }, 1200); 
+        }
+
+        function cancelUntie() {
+            clearTimeout(holdTimer);
+            if (!document.getElementById('ribbonSystem').classList.contains('untied')) {
+                document.getElementById('tagText').innerHTML = "Hold To Untie";
+            }
+        }
+
+        // --- Sequential Ink Revealing Process ---
+        function blowCandle() {
+            document.getElementById('flame').style.display = 'none';
+            document.getElementById('prompt-text').style.display = 'none';
+            document.getElementById('letterBox').style.display = 'block';
+
+            setTimeout(() => { document.getElementById('line1').classList.add('write-active'); }, 200);
+            setTimeout(() => { document.getElementById('line2').classList.add('write-active'); }, 1400);
+            setTimeout(() => { document.getElementById('line3').classList.add('write-active'); }, 2800);
+            setTimeout(() => { document.getElementById('line4').classList.add('write-active'); }, 4200);
+            setTimeout(() => { document.getElementById('line5').classList.add('write-active'); }, 5600);
+        }
+
+        // --- Global Page Progression Router ---
+        function nextPage() {
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage++;
+            if (currentPage > totalPages) currentPage = 1;
+            document.getElementById(`page${currentPage}`).classList.add('active');
+
+            const btn = document.getElementById('nextBtn');
+            if (currentPage === 1) btn.innerText = "Open Card";
+            else if (currentPage === 2) btn.innerText = "See Photos";
+            else if (currentPage === 3) btn.innerText = "Read Again";
+        }
+    </script>
+
+</body>
+</html>
